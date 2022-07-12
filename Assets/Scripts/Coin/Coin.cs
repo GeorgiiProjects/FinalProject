@@ -10,7 +10,7 @@ public class Coin : MonoBehaviour
     [SerializeField] private Text _coinText;
 
     private Object _coinEffect;
-    private const string _effect = "COIN_EFFECT";
+    private const string COIN_EFFECT = "Coin effect";
 
     private void OnEnable()
     {
@@ -24,7 +24,7 @@ public class Coin : MonoBehaviour
 
     private void Start()
     {
-        _coinEffect = Resources.Load(_effect);
+        _coinEffect = Resources.Load(COIN_EFFECT);
     }
 
     private void OnTriggerEnter(Collider other)

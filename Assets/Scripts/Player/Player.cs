@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
         }
     } 
 
-    public void Die()
+    private void Die()
     {
         Died?.Invoke();
         _dieSound.Play();
@@ -35,7 +35,7 @@ public class Player : MonoBehaviour
         StartCoroutine(DelayVanish());
     }
 
-    public void Win()
+    private void Win()
     {
         Wined?.Invoke();
         _winSound.Play();

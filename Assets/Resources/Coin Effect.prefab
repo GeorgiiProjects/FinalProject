@@ -9377,7 +9377,7 @@ GameObject:
   - component: {fileID: 2430684230236374223}
   - component: {fileID: 2430684230236487023}
   m_Layer: 0
-  m_Name: COIN_EFFECT
+  m_Name: Coin Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
