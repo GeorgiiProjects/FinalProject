@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -8,7 +7,6 @@ public class Movement : MonoBehaviour
     [SerializeField] private float _towardSpeed;
     [SerializeField] private float _jumpForce;
     [SerializeField] private float _boostSpeed;
-    [SerializeField] private float _speedUpDuration;
     [SerializeField] private float _xRange;
     [SerializeField] private AudioSource _jumpSound;
 
@@ -39,7 +37,6 @@ public class Movement : MonoBehaviour
         if (other.gameObject.TryGetComponent(out SpeedBooster speedBooster))
         {
             _playerRb.AddForce(0, 0, _forwardSpeed * _boostSpeed);
-            SpeedupCooldown();
         }
     }
 
@@ -64,10 +61,5 @@ public class Movement : MonoBehaviour
     private void Position()
     {       
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, -_xRange, _xRange), transform.position.y, transform.position.z);
-    }
-
-    private IEnumerator SpeedupCooldown()
-    {
-        yield return new WaitForSeconds(_speedUpDuration);
     }
 }
