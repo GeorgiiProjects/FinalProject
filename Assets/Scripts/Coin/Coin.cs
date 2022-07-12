@@ -4,10 +4,13 @@ using UnityEngine.UI;
 public class Coin : MonoBehaviour
 {
     [SerializeField] private int _coins;
-    [SerializeField] private float _destroyCoin;
+    [SerializeField] private float _timeToDestroy;
     [SerializeField] private PlayerWallet _playerWallet;
     [SerializeField] private AudioSource _reboundSound;    
     [SerializeField] private Text _coinText;
+
+    private Object _coinEffect;
+    private const string _effect = "COIN_EFFECT";
 
     private void OnEnable()
     {
@@ -19,11 +22,17 @@ public class Coin : MonoBehaviour
         _playerWallet.Coined -= OnCoined;
     }
 
+    private void Start()
+    {
+        _coinEffect = Resources.Load(_effect);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.TryGetComponent(out Player player))
         {
-            Destroy(gameObject, _destroyCoin);
+            PlayParticle();
+            PlaySound();
         }
     }
 
@@ -31,6 +40,18 @@ public class Coin : MonoBehaviour
     {
         _coins++;
         _coinText.text = _coins.ToString();
+    }
+
+    private void PlayParticle()
+    {
+        var coinEffectRef = (GameObject)Instantiate(_coinEffect);
+        coinEffectRef.transform.position = transform.position;
+        Destroy(coinEffectRef, _timeToDestroy);
+    }
+
+    private void PlaySound()
+    {
         _reboundSound.Play();
+        Destroy(gameObject, _reboundSound.clip.length);
     }
 }
